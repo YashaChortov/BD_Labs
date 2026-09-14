@@ -280,22 +280,24 @@
 
 ```mermaid
 erDiagram
-    users ||--o{ orders : places
-    users ||--o{ reviews : writes
-    users ||--|| carts : has
-    users ||--o{ user_roles : has
-    roles ||--o{ user_roles : assigned
-    categories ||--o{ products : contains
-    categories ||--o{ categories : parent
-    suppliers ||--o{ products : supplies
-    products ||--o{ product_images : has
-    products ||--o{ order_items : included
-    products ||--o{ cart_items : included
-    products ||--o{ reviews : receives
-    orders ||--o{ order_items : contains
-    orders ||--o{ payments : has
-    orders ||--o{ shipments : has
-    carts ||--o{ cart_items : contains
+    %% ===== Сущности и связи =====
+
+    users ||--o{ orders : "делает заказ"
+    users ||--o{ reviews : "пишет отзыв"
+    users ||--|| carts : "владеет корзиной"
+    users ||--o{ user_roles : "имеет роль"
+    roles ||--o{ user_roles : "назначена"
+    categories ||--o{ products : "содержит товар"
+    categories ||--o{ categories : "является родителем"
+    suppliers ||--o{ products : "поставляет"
+    products ||--o{ product_images : "имеет изображение"
+    products ||--o{ order_items : "входит в заказ"
+    products ||--o{ cart_items : "входит в корзину"
+    products ||--o{ reviews : "получает отзыв"
+    orders ||--|{ order_items : "содержит позиции"
+    orders ||--o{ payments : "оплачивается"
+    orders ||--o{ shipments : "доставляется"
+    carts ||--o{ cart_items : "содержит позиции"
 ```
 
 ---
@@ -503,7 +505,7 @@ erDiagram
     products ||--o{ order_items : included
     products ||--o{ cart_items : included
     products ||--o{ reviews : receives
-    orders ||--o{ order_items : contains
+    orders ||--|{ order_items : contains
     orders ||--o{ payments : has
     orders ||--o{ shipments : has
     carts ||--o{ cart_items : contains
